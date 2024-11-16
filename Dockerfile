@@ -1,11 +1,11 @@
 FROM node:18-alpine
 WORKDIR /app
 
-COPY ./package.json .
+COPY ./package.json ./yarn.lock* ./
 
-RUN yarn
+RUN yarn install
 
-COPY . .
+RUN yarn add sass
+COPY . ./
 
-RUN yarn build
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]
