@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  social-app:
+    image: ubongpr7/social-test-app:latest
+    container_name: social-test-app
+    ports:
+      - "3000:3000"           # Map container's port 3000 to localhost:3000
+    environment:
+      - NODE_ENV=development  # Enable development mode
+    volumes:
+      - .:/app                # Mount the current directory into the container
+      - /app/node_modules     # Exclude node_modules to avoid conflicts
+    command: ["yarn", "dev"]  # Override CMD to run in dev mode
+    restart: unless-stopped
